@@ -24,6 +24,22 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+const eventoRoutes = require("./routes/eventoRoutes");
+
+const trilhaRoutes = require("./routes/trilhaRoutes");
+
+const biodiversidadeRoutes = require("./routes/biodiversidadeRoutes");
+
+const authRoutes = require("./routes/authRoutes");
+
+app.use("/api/eventos", eventoRoutes);
+
+app.use("/api/trilhas", trilhaRoutes);
+
+app.use("/api/biodivers", biodiversidadeRoutes);
+
+app.use("/api/auth", authRoutes);
+
 /* ==========================
    Página Inicial
 ========================== */

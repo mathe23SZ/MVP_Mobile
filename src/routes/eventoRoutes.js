@@ -1,39 +1,18 @@
 const express = require("express");
+
 const router = express.Router();
-const db = require("../database");
 
-router.get("/", (req, res) => {
+const eventoController = require("../controllers/eventoController");
 
-  db.all("SELECT * FROM eventos", [], (err, rows) => {
+router.get("/", (req,res)=>{
 
-    if(err){
-      return res.status(500).json(err);
-    }
+    res.json({
 
-    res.json(rows);
-  });
+        modulo:"Eventos",
 
-});
+        status:"OK"
 
-router.post("/", (req,res)=>{
-
-  const { titulo, descricao, data } = req.body;
-
-  db.run(
-    "INSERT INTO eventos(titulo, descricao, data) VALUES(?,?,?)",
-    [titulo, descricao, data],
-    function(err){
-
-      if(err){
-        return res.status(500).json(err);
-      }
-
-      res.json({
-        id:this.lastID
-      });
-
-    }
-  );
+    });
 
 });
 

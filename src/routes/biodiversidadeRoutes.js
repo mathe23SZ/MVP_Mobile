@@ -2,13 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
-const authController = require("../controllers/authController");
+const biodiversidadeController = require("../controllers/biodiversidadeController");
 
 router.get("/",(req,res)=>{
 
     res.json({
 
-        modulo:"Autenticação",
+        modulo:"Biodiversidade",
 
         status:"OK"
 

@@ -79,7 +79,9 @@ db.serialize(() => {
 
             descricao TEXT,
 
-            imagem TEXT
+            imagem TEXT,
+
+            status TEXT
 
         )
     `);

@@ -2,18 +2,16 @@ const express = require("express");
 
 const router = express.Router();
 
-const biodiversidadeController = require("../controllers/biodiversidadeController");
+const BiodiversidadeController = require("../controllers/BiodiversidadeController");
 
-router.get("/",(req,res)=>{
+router.get("/", BiodiversidadeController.listar);
 
-    res.json({
+router.get("/:id", BiodiversidadeController.buscar);
 
-        modulo:"Biodiversidade",
+router.post("/", BiodiversidadeController.criar);
 
-        status:"OK"
+router.put("/:id", BiodiversidadeController.atualizar);
 
-    });
-
-});
+router.delete("/:id", BiodiversidadeController.excluir);
 
 module.exports = router;

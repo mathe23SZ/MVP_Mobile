@@ -1,36 +1,38 @@
 const Evento = require("../models/Evento");
 
+const ApiResponse = require("../utils/ApiResponse");
+
+const ApiError = require("../utils/ApiError");
+
 class EventoController {
 
-    async listar(req, res) {
+    async listar(req, res, next) {
 
         try {
 
-            const eventos = await Evento.listarTodos();
+            const eventos = await Evento.listarTodos("data");
 
-            res.json({
+            ApiResponse.success(
 
-                success: true,
+                res,
 
-                data: eventos
+                eventos,
 
-            });
+                "Eventos listados com sucesso."
 
-        } catch (erro) {
+            );
 
-            res.status(500).json({
+        }
 
-                success: false,
+        catch (erro) {
 
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async buscar(req, res) {
+    async buscar(req, res, next) {
 
         try {
 
@@ -38,117 +40,143 @@ class EventoController {
 
             if (!evento) {
 
-                return res.status(404).json({
+                throw new ApiError(
 
-                    success: false,
+                    "Evento não encontrado.",
 
-                    message: "Evento não encontrado."
+                    404
 
-                });
+                );
 
             }
 
-            res.json({
+            ApiResponse.success(
 
-                success: true,
+                res,
 
-                data: evento
+                evento,
 
-            });
+                "Evento encontrado."
 
-        } catch (erro) {
+            );
 
-            res.status(500).json({
+        }
 
-                success: false,
+        catch (erro) {
 
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async criar(req, res) {
+    async criar(req, res, next) {
 
         try {
 
             const id = await Evento.criar(req.body);
 
-            res.status(201).json({
+            ApiResponse.created(
 
-                success: true,
+                res,
 
-                id
+                { id },
 
-            });
+                "Evento cadastrado com sucesso."
 
-        } catch (erro) {
+            );
 
-            res.status(500).json({
+        }
 
-                success: false,
+        catch (erro) {
 
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async atualizar(req, res) {
+    async atualizar(req, res, next) {
 
         try {
 
-            await Evento.atualizar(req.params.id, req.body);
+            const alterados = await Evento.atualizar(
 
-            res.json({
+                req.params.id,
 
-                success: true,
+                req.body
 
-                message: "Evento atualizado."
+            );
 
-            });
+            if (!alterados) {
 
-        } catch (erro) {
+                throw new ApiError(
 
-            res.status(500).json({
+                    "Evento não encontrado.",
 
-                success: false,
+                    404
 
-                message: erro.message
+                );
 
-            });
+            }
+
+            ApiResponse.success(
+
+                res,
+
+                null,
+
+                "Evento atualizado com sucesso."
+
+            );
+
+        }
+
+        catch (erro) {
+
+            next(erro);
 
         }
 
     }
 
-    async excluir(req, res) {
+    async excluir(req, res, next) {
 
         try {
 
-            await Evento.excluir(req.params.id);
+            const removidos = await Evento.excluir(
 
-            res.json({
+                req.params.id
 
-                success: true,
+            );
 
-                message: "Evento removido."
+            if (!removidos) {
 
-            });
+                throw new ApiError(
 
-        } catch (erro) {
+                    "Evento não encontrado.",
 
-            res.status(500).json({
+                    404
 
-                success: false,
+                );
 
-                message: erro.message
+            }
 
-            });
+            ApiResponse.success(
+
+                res,
+
+                null,
+
+                "Evento removido com sucesso."
+
+            );
+
+        }
+
+        catch (erro) {
+
+            next(erro);
 
         }
 

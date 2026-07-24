@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const errorHandler = require("./middleware/errorHandler");
 
 require("./config/database");
 
@@ -65,3 +66,5 @@ app.listen(PORT, () => {
     console.log("===================================");
 
 });
+
+app.use(errorHandler);

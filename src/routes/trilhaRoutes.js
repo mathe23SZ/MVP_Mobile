@@ -2,18 +2,16 @@ const express = require("express");
 
 const router = express.Router();
 
-const trilhaController = require("../controllers/trilhaController");
+const TrilhaController = require("../controllers/trilhaController");
 
-router.get("/",(req,res)=>{
+router.get("/", TrilhaController.listar);
 
-    res.json({
+router.get("/:id", TrilhaController.buscar);
 
-        modulo:"Trilhas",
+router.post("/", TrilhaController.criar);
 
-        status:"OK"
+router.put("/:id", TrilhaController.atualizar);
 
-    });
-
-});
+router.delete("/:id", TrilhaController.excluir);
 
 module.exports = router;

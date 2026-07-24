@@ -1,42 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <title>Trilhas</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Trilhas | Circuito Terê Verde</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
 
 <body>
 
-<header>
-<h1>Trilhas</h1>
-</header>
+    <!-- Navbar -->
 
-<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
 
-<div class="card">
-<h3>Pedra do Sino</h3>
-<p>Dificuldade: Difícil</p>
-<p>Status: Aberta</p>
-</div>
+        <div class="container">
 
-<div class="card">
-<h3>Cartão Postal</h3>
-<p>Dificuldade: Média</p>
-<p>Status: Aberta</p>
-</div>
+            <a class="navbar-brand fw-bold" href="index.html">
 
-<div class="card">
-<h3>Suspensa</h3>
-<p>Dificuldade: Fácil</p>
-<p>Status: Fechada</p>
-</div>
+                🌿 Circuito Terê Verde
 
-</div>
+            </a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+            <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="index.html">Início</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="eventos.html">Eventos</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link active" href="trilhas.html">Trilhas</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="biodiversidade.html">Biodiversidade</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-light ms-3" href="login.html">
+
+                            Administrador
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Cabeçalho -->
+
+    <section class="py-5 bg-light">
+
+        <div class="container text-center">
+
+            <h1 class="display-5 fw-bold">
+
+                Trilhas dos Parques
+
+            </h1>
+
+            <p class="lead">
+
+                Escolha uma trilha e descubra as belezas naturais de Teresópolis.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Cards -->
+
+    <section class="container py-5">
+
+        <div class="row g-4">
+
+            <!-- Card -->
+
+            <div class="col-lg-4">
+
+                <div class="card shadow h-100">
+
+                    <img src="../images/trilha_suspensa.jpg"
+                        class="card-img-top"
+                        alt="Trilha">
+
+                    <div class="card-body">
+
+                        <h4>Trilha Suspensa</h4>
+
+                        <p>
+
+                            <i class="bi bi-signpost"></i>
+
+                            Distância: 2,4 km
+
+                        </p>
+
+                        <p>
+
+                            <i class="bi bi-speedometer2"></i>
+
+                            Dificuldade: Fácil
+
+                        </p>
+
+                        <span class="badge bg-success">
+
+                            Aberta
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="col-lg-4">
+
+                <div class="card shadow h-100">
+
+                    <img src="../images/trilha_pedr_tart.jpg"
+                        class="card-img-top"
+                        alt="Trilha">
+
+                    <div class="card-body">
+
+                        <h4>Pedra do Sino</h4>
+
+                        <p>
+
+                            <i class="bi bi-signpost"></i>
+
+                            Distância: 11 km
+
+                        </p>
+
+                        <p>
+
+                            <i class="bi bi-speedometer2"></i>
+
+                            Dificuldade: Difícil
+
+                        </p>
+
+                        <span class="badge bg-success">
+
+                            Aberta
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Card -->
+
+            <div class="col-lg-4">
+
+                <div class="card shadow h-100">
+
+                    <img src="../images/cartao_postal.jpg"
+                        class="card-img-top"
+                        alt="Trilha">
+
+                    <div class="card-body">
+
+                        <h4>Cartão Postal</h4>
+
+                        <p>
+
+                            <i class="bi bi-signpost"></i>
+
+                            Distância: 4 km
+
+                        </p>
+
+                        <p>
+
+                            <i class="bi bi-speedometer2"></i>
+
+                            Dificuldade: Moderada
+
+                        </p>
+
+                        <span class="badge bg-warning text-dark">
+
+                            Manutenção
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Rodapé -->
+
+    <footer class="bg-success text-white text-center p-4">
+
+        <h5>
+
+            Circuito Terê Verde
+
+        </h5>
+
+        <p>
+
+            MVP Mobile • UNIFESO
+
+        </p>
+
+        <small>
+
+            Desenvolvido para fins acadêmicos.
+
+        </small>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

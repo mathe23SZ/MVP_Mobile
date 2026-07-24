@@ -1,1 +1,5 @@
-console.log("Terê Verde Online iniciado.");
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("Circuito Terê Verde iniciado.");
+
+});

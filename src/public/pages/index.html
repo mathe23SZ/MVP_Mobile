@@ -1,58 +1,301 @@
 <!DOCTYPE html>
-
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Terê Verde Online</title>
+    <title>Circuito Terê Verde</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
 
-<link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg">
+    <!-- ==========================
+         Navbar
+    =========================== -->
 
-<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
 
-<a class="navbar-brand" href="/">Terê Verde Online</a>
+        <div class="container">
 
-</div>
+            <a class="navbar-brand fw-bold" href="/">
 
-</nav>
+                🌿 Circuito Terê Verde
 
-<section class="banner">
+            </a>
 
-<h1>Bem-vindo ao Terê Verde Online</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
 
-<p>
+                <span class="navbar-toggler-icon"></span>
 
-Explore os parques naturais, trilhas, biodiversidade e eventos de Teresópolis.
+            </button>
 
-</p>
+            <div class="collapse navbar-collapse" id="menu">
 
-</section>
+                <ul class="navbar-nav ms-auto">
 
-<div class="container mt-5">
+                    <li class="nav-item">
 
-<div class="alert alert-success">
+                        <a class="nav-link active" href="/">Início</a>
 
-Servidor funcionando corretamente.
+                    </li>
 
-</div>
+                    <li class="nav-item">
 
-</div>
+                        <a class="nav-link" href="eventos.html">Eventos</a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+                    </li>
 
-<script src="js/main.js"></script>
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="trilhas.html">Trilhas</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="biodiversidade.html">Biodiversidade</a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-light ms-3" href="login.html">
+
+                            Administrador
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ==========================
+         Hero
+    =========================== -->
+
+    <section class="hero">
+
+        <div class="container text-center">
+
+            <h1 class="display-4 fw-bold">
+
+                Bem-vindo ao Circuito Terê Verde
+
+            </h1>
+
+            <p class="lead mt-3">
+
+                Descubra trilhas, eventos e a biodiversidade dos parques naturais de Teresópolis.
+
+            </p>
+
+            <a href="trilhas.html" class="btn btn-success btn-lg mt-3">
+
+                Explorar Trilhas
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================
+         Cards
+    =========================== -->
+
+    <section class="container my-5">
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="card h-100 shadow">
+
+                    <div class="card-body text-center">
+
+                        <i class="bi bi-calendar-event display-3 text-success"></i>
+
+                        <h3 class="mt-3">
+
+                            Eventos
+
+                        </h3>
+
+                        <p>
+
+                            Consulte eventos ambientais e atividades realizadas nos parques.
+
+                        </p>
+
+                        <a href="eventos.html" class="btn btn-success">
+
+                            Ver Eventos
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card h-100 shadow">
+
+                    <div class="card-body text-center">
+
+                        <i class="bi bi-signpost-split display-3 text-success"></i>
+
+                        <h3 class="mt-3">
+
+                            Trilhas
+
+                        </h3>
+
+                        <p>
+
+                            Conheça as trilhas e planeje sua próxima aventura.
+
+                        </p>
+
+                        <a href="trilhas.html" class="btn btn-success">
+
+                            Ver Trilhas
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card h-100 shadow">
+
+                    <div class="card-body text-center">
+
+                        <i class="bi bi-tree display-3 text-success"></i>
+
+                        <h3 class="mt-3">
+
+                            Biodiversidade
+
+                        </h3>
+
+                        <p>
+
+                            Explore espécies da fauna e flora encontradas na região.
+
+                        </p>
+
+                        <a href="biodiversidade.html" class="btn btn-success">
+
+                            Conhecer
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================
+         Sobre
+    =========================== -->
+
+    <section class="container my-5">
+
+        <div class="row">
+
+            <div class="col-lg-10 mx-auto text-center">
+
+                <h2>
+
+                    Sobre o Projeto
+
+                </h2>
+
+                <p class="mt-4">
+
+                    O Circuito Terê Verde é uma plataforma desenvolvida para facilitar o acesso às informações dos parques naturais de Teresópolis, reunindo dados sobre trilhas, biodiversidade e eventos em um único ambiente digital.
+
+                </p>
+
+                <p>
+
+                    O objetivo é incentivar o turismo sustentável, promover a educação ambiental e aproximar visitantes das riquezas naturais do município.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================
+         Rodapé
+    =========================== -->
+
+    <footer class="bg-success text-white text-center p-4 mt-5">
+
+        <h5>
+
+            Circuito Terê Verde
+
+        </h5>
+
+        <p>
+
+            MVP Mobile • UNIFESO
+
+        </p>
+
+        <small>
+
+            Desenvolvido para fins acadêmicos.
+
+        </small>
+
+    </footer>
+
+    <!-- Bootstrap -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS -->
+
+    <script src="../js/main.js"></script>
 
 </body>
 

@@ -76,21 +76,7 @@ app.use(`${API}/auth`, authRoutes);
 
 app.get("/", (req, res) => {
 
-    res.sendFile(
-
-        path.join(
-
-            __dirname,
-
-            "public",
-
-            "pages",
-
-            "index.html"
-
-        )
-
-    );
+    res.redirect("/pages/index.html");
 
 });
 

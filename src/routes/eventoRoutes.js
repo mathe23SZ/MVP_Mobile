@@ -2,18 +2,21 @@ const express = require("express");
 
 const router = express.Router();
 
-const eventoController = require("../controllers/eventoController");
+const EventoController = require("../controllers/EventoController");
 
-router.get("/", (req,res)=>{
+// Listar todos
+router.get("/", EventoController.listar);
 
-    res.json({
+// Buscar por ID
+router.get("/:id", EventoController.buscar);
 
-        modulo:"Eventos",
+// Criar
+router.post("/", EventoController.criar);
 
-        status:"OK"
+// Atualizar
+router.put("/:id", EventoController.atualizar);
 
-    });
-
-});
+// Excluir
+router.delete("/:id", EventoController.excluir);
 
 module.exports = router;

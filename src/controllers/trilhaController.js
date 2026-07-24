@@ -1,164 +1,119 @@
 const Trilha = require("../models/Trilha");
+const ApiResponse = require("../utils/ApiResponse");
+const ApiError = require("../utils/ApiError");
 
 class TrilhaController {
 
-    async listar(req, res) {
+    async listar(req, res, next) {
 
         try {
 
-            const trilhas = await Trilha.listarTodos();
+            const trilhas = await Trilha.listarTodos("nome");
 
-            res.json({
+            ApiResponse.success(
+                res,
+                trilhas,
+                "Trilhas listadas com sucesso."
+            );
 
-                success: true,
+        } catch (erro) {
 
-                data: trilhas
-
-            });
-
-        }
-
-        catch (erro) {
-
-            res.status(500).json({
-
-                success: false,
-
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async buscar(req, res) {
+    async buscar(req, res, next) {
 
         try {
 
             const trilha = await Trilha.buscarPorId(req.params.id);
 
             if (!trilha) {
-
-                return res.status(404).json({
-
-                    success: false,
-
-                    message: "Trilha não encontrada."
-
-                });
-
+                throw new ApiError("Trilha não encontrada.", 404);
             }
 
-            res.json({
+            ApiResponse.success(
+                res,
+                trilha,
+                "Trilha encontrada."
+            );
 
-                success: true,
+        } catch (erro) {
 
-                data: trilha
-
-            });
-
-        }
-
-        catch (erro) {
-
-            res.status(500).json({
-
-                success: false,
-
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async criar(req, res) {
+    async criar(req, res, next) {
 
         try {
 
             const id = await Trilha.criar(req.body);
 
-            res.status(201).json({
+            ApiResponse.created(
+                res,
+                { id },
+                "Trilha cadastrada com sucesso."
+            );
 
-                success: true,
+        } catch (erro) {
 
-                id
-
-            });
-
-        }
-
-        catch (erro) {
-
-            res.status(500).json({
-
-                success: false,
-
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async atualizar(req, res) {
+    async atualizar(req, res, next) {
 
         try {
 
-            await Trilha.atualizar(req.params.id, req.body);
+            const alterados = await Trilha.atualizar(
+                req.params.id,
+                req.body
+            );
 
-            res.json({
+            if (!alterados) {
+                throw new ApiError("Trilha não encontrada.", 404);
+            }
 
-                success: true,
+            ApiResponse.success(
+                res,
+                null,
+                "Trilha atualizada com sucesso."
+            );
 
-                message: "Trilha atualizada."
+        } catch (erro) {
 
-            });
-
-        }
-
-        catch (erro) {
-
-            res.status(500).json({
-
-                success: false,
-
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async excluir(req, res) {
+    async excluir(req, res, next) {
 
         try {
 
-            await Trilha.excluir(req.params.id);
+            const removidos = await Trilha.excluir(req.params.id);
 
-            res.json({
+            if (!removidos) {
+                throw new ApiError("Trilha não encontrada.", 404);
+            }
 
-                success: true,
+            ApiResponse.success(
+                res,
+                null,
+                "Trilha removida com sucesso."
+            );
 
-                message: "Trilha removida."
+        } catch (erro) {
 
-            });
-
-        }
-
-        catch (erro) {
-
-            res.status(500).json({
-
-                success: false,
-
-                message: erro.message
-
-            });
+            next(erro);
 
         }
 

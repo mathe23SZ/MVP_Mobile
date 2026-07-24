@@ -1,164 +1,119 @@
 const Biodiversidade = require("../models/Biodiversidade");
+const ApiResponse = require("../utils/ApiResponse");
+const ApiError = require("../utils/ApiError");
 
 class BiodiversidadeController {
 
-    async listar(req,res){
+    async listar(req, res, next) {
 
-        try{
+        try {
 
-            const lista = await Biodiversidade.listarTodos("nome");
+            const itens = await Biodiversidade.listarTodos("nome");
 
-            res.json({
+            ApiResponse.success(
+                res,
+                itens,
+                "Espécies listadas com sucesso."
+            );
 
-                success:true,
+        } catch (erro) {
 
-                data:lista
-
-            });
-
-        }
-
-        catch(erro){
-
-            res.status(500).json({
-
-                success:false,
-
-                message:erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async buscar(req,res){
+    async buscar(req, res, next) {
 
-        try{
+        try {
 
             const item = await Biodiversidade.buscarPorId(req.params.id);
 
-            if(!item){
-
-                return res.status(404).json({
-
-                    success:false,
-
-                    message:"Registro não encontrado."
-
-                });
-
+            if (!item) {
+                throw new ApiError("Registro não encontrado.", 404);
             }
 
-            res.json({
+            ApiResponse.success(
+                res,
+                item,
+                "Registro encontrado."
+            );
 
-                success:true,
+        } catch (erro) {
 
-                data:item
-
-            });
-
-        }
-
-        catch(erro){
-
-            res.status(500).json({
-
-                success:false,
-
-                message:erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async criar(req,res){
+    async criar(req, res, next) {
 
-        try{
+        try {
 
             const id = await Biodiversidade.criar(req.body);
 
-            res.status(201).json({
+            ApiResponse.created(
+                res,
+                { id },
+                "Registro cadastrado com sucesso."
+            );
 
-                success:true,
+        } catch (erro) {
 
-                id
-
-            });
-
-        }
-
-        catch(erro){
-
-            res.status(500).json({
-
-                success:false,
-
-                message:erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async atualizar(req,res){
+    async atualizar(req, res, next) {
 
-        try{
+        try {
 
-            await Biodiversidade.atualizar(req.params.id,req.body);
+            const alterados = await Biodiversidade.atualizar(
+                req.params.id,
+                req.body
+            );
 
-            res.json({
+            if (!alterados) {
+                throw new ApiError("Registro não encontrado.", 404);
+            }
 
-                success:true,
+            ApiResponse.success(
+                res,
+                null,
+                "Registro atualizado com sucesso."
+            );
 
-                message:"Registro atualizado."
+        } catch (erro) {
 
-            });
-
-        }
-
-        catch(erro){
-
-            res.status(500).json({
-
-                success:false,
-
-                message:erro.message
-
-            });
+            next(erro);
 
         }
 
     }
 
-    async excluir(req,res){
+    async excluir(req, res, next) {
 
-        try{
+        try {
 
-            await Biodiversidade.excluir(req.params.id);
+            const removidos = await Biodiversidade.excluir(req.params.id);
 
-            res.json({
+            if (!removidos) {
+                throw new ApiError("Registro não encontrado.", 404);
+            }
 
-                success:true,
+            ApiResponse.success(
+                res,
+                null,
+                "Registro removido com sucesso."
+            );
 
-                message:"Registro removido."
+        } catch (erro) {
 
-            });
-
-        }
-
-        catch(erro){
-
-            res.status(500).json({
-
-                success:false,
-
-                message:erro.message
-
-            });
+            next(erro);
 
         }
 

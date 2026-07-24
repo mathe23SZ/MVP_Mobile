@@ -1,5 +1,3 @@
-const Administrador = require("../models/Administrador");
-
 const ApiResponse = require("../utils/ApiResponse");
 
 class AuthController {
@@ -9,13 +7,9 @@ class AuthController {
         try {
 
             ApiResponse.success(
-
                 res,
-
                 null,
-
                 "Módulo de autenticação disponível."
-
             );
 
         } catch (erro) {

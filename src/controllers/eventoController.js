@@ -1,7 +1,5 @@
 const Evento = require("../models/Evento");
-
 const ApiResponse = require("../utils/ApiResponse");
-
 const ApiError = require("../utils/ApiError");
 
 class EventoController {
@@ -13,18 +11,12 @@ class EventoController {
             const eventos = await Evento.listarTodos("data");
 
             ApiResponse.success(
-
                 res,
-
                 eventos,
-
                 "Eventos listados com sucesso."
-
             );
 
-        }
-
-        catch (erro) {
+        } catch (erro) {
 
             next(erro);
 
@@ -39,30 +31,16 @@ class EventoController {
             const evento = await Evento.buscarPorId(req.params.id);
 
             if (!evento) {
-
-                throw new ApiError(
-
-                    "Evento não encontrado.",
-
-                    404
-
-                );
-
+                throw new ApiError("Evento não encontrado.", 404);
             }
 
             ApiResponse.success(
-
                 res,
-
                 evento,
-
                 "Evento encontrado."
-
             );
 
-        }
-
-        catch (erro) {
+        } catch (erro) {
 
             next(erro);
 
@@ -77,18 +55,12 @@ class EventoController {
             const id = await Evento.criar(req.body);
 
             ApiResponse.created(
-
                 res,
-
                 { id },
-
                 "Evento cadastrado com sucesso."
-
             );
 
-        }
-
-        catch (erro) {
+        } catch (erro) {
 
             next(erro);
 
@@ -101,38 +73,21 @@ class EventoController {
         try {
 
             const alterados = await Evento.atualizar(
-
                 req.params.id,
-
                 req.body
-
             );
 
             if (!alterados) {
-
-                throw new ApiError(
-
-                    "Evento não encontrado.",
-
-                    404
-
-                );
-
+                throw new ApiError("Evento não encontrado.", 404);
             }
 
             ApiResponse.success(
-
                 res,
-
                 null,
-
                 "Evento atualizado com sucesso."
-
             );
 
-        }
-
-        catch (erro) {
+        } catch (erro) {
 
             next(erro);
 
@@ -144,37 +99,19 @@ class EventoController {
 
         try {
 
-            const removidos = await Evento.excluir(
-
-                req.params.id
-
-            );
+            const removidos = await Evento.excluir(req.params.id);
 
             if (!removidos) {
-
-                throw new ApiError(
-
-                    "Evento não encontrado.",
-
-                    404
-
-                );
-
+                throw new ApiError("Evento não encontrado.", 404);
             }
 
             ApiResponse.success(
-
                 res,
-
                 null,
-
                 "Evento removido com sucesso."
-
             );
 
-        }
-
-        catch (erro) {
+        } catch (erro) {
 
             next(erro);
 

@@ -1,9 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
-
 const path = require("path");
-
 const dbPath = path.join(__dirname, "..", "data", "tereverde.db");
-
 const db = new sqlite3.Database(dbPath, (erro) => {
 
     if (erro) {
@@ -25,16 +22,74 @@ const db = new sqlite3.Database(dbPath, (erro) => {
 db.serialize(() => {
 
     db.run(`
-        CREATE TABLE IF NOT EXISTS administrador(
-
+        CREATE TABLE IF NOT EXISTS administradores(
+        
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-            usuario TEXT UNIQUE,
-
-            senha TEXT
-
+        
+            nome TEXT NOT NULL,
+        
+            usuario TEXT UNIQUE NOT NULL,
+        
+            senha TEXT NOT NULL
+        
         )
-    `);
+        `, () => {
+        
+            db.get(
+        
+                "SELECT COUNT(*) AS total FROM administradores",
+        
+                (erro, resultado) => {
+        
+                    if (erro) {
+        
+                        console.error(erro);
+        
+                        return;
+        
+                    }
+        
+                    if (resultado.total === 0) {
+        
+                        db.run(
+
+                            `INSERT INTO administradores
+                            (nome, usuario, senha)
+                            VALUES (?, ?, ?)`,
+                        
+                            [
+                        
+                                "Administrador",
+                        
+                                "admin",
+                        
+                                "123456"
+                        
+                            ],
+                        
+                            (erro) => {
+                        
+                                if (erro) {
+                        
+                                    console.error("Erro ao criar administrador padrão:", erro);
+                        
+                                    return;
+                        
+                                }
+                        
+                                console.log("Administrador padrão criado.");
+                        
+                            }
+                        
+                        );
+        
+                    }
+        
+                }
+        
+            );
+        
+        });
 
     db.run(`
         CREATE TABLE IF NOT EXISTS eventos(

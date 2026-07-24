@@ -1,4 +1,4 @@
-const Biodiversidade = require("../models/Biodiversidade");
+const BiodiversidadeModel = require("../models/BiodiversidadeModel");
 const ApiResponse = require("../utils/ApiResponse");
 const ApiError = require("../utils/ApiError");
 
@@ -8,7 +8,7 @@ class BiodiversidadeController {
 
         try {
 
-            const itens = await Biodiversidade.listarTodos("nome");
+            const itens = await BiodiversidadeModel.listarTodos("nome");
 
             ApiResponse.success(
                 res,
@@ -28,7 +28,7 @@ class BiodiversidadeController {
 
         try {
 
-            const item = await Biodiversidade.buscarPorId(req.params.id);
+            const item = await BiodiversidadeModel.buscarPorId(req.params.id);
 
             if (!item) {
                 throw new ApiError("Registro não encontrado.", 404);
@@ -52,7 +52,7 @@ class BiodiversidadeController {
 
         try {
 
-            const id = await Biodiversidade.criar(req.body);
+            const id = await BiodiversidadeModel.criar(req.body);
 
             ApiResponse.created(
                 res,
@@ -72,7 +72,7 @@ class BiodiversidadeController {
 
         try {
 
-            const alterados = await Biodiversidade.atualizar(
+            const alterados = await BiodiversidadeModel.atualizar(
                 req.params.id,
                 req.body
             );
@@ -99,7 +99,7 @@ class BiodiversidadeController {
 
         try {
 
-            const removidos = await Biodiversidade.excluir(req.params.id);
+            const removidos = await BiodiversidadeModel.excluir(req.params.id);
 
             if (!removidos) {
                 throw new ApiError("Registro não encontrado.", 404);

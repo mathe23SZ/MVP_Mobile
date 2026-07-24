@@ -3,21 +3,20 @@ const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 
+// Inicializa a conexão com o banco
 require("./config/database");
 
-app.use((req, res) => {
-
-   res.status(404).json({
-       success: false,
-       message: "Rota não encontrada."
-
-   });
-
-});
-
 const errorHandler = require("./middleware/errorHandler");
+
+const eventoRoutes = require("./routes/eventoRoutes");
+const trilhaRoutes = require("./routes/trilhaRoutes");
+const biodiversidadeRoutes = require("./routes/biodiversidadeRoutes");
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 const PORT = 3000;
+
+const API = "/api";
 
 /* ==========================
    Sessão
@@ -25,12 +24,17 @@ const PORT = 3000;
 
 app.use(session({
 
-   secret: "tereverde_mvp",
-   resave: false,
-   saveUninitialized: false,
-   cookie: {
-       maxAge: 1000 * 60 * 60
-   }
+    secret: "tereverde_mvp",
+
+    resave: false,
+
+    saveUninitialized: false,
+
+    cookie: {
+
+        maxAge: 1000 * 60 * 60
+
+    }
 
 }));
 
@@ -39,8 +43,14 @@ app.use(session({
 ========================== */
 
 app.use(cors());
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+app.use(express.urlencoded({
+
+    extended: true
+
+}));
 
 /* ==========================
    Arquivos Públicos
@@ -48,16 +58,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const eventoRoutes = require("./routes/eventoRoutes");
-const trilhaRoutes = require("./routes/trilhaRoutes");
-const biodiversidadeRoutes = require("./routes/biodiversidadeRoutes");
-const authRoutes = require("./routes/authRoutes");
-
-const API = "/api";
+/* ==========================
+   Rotas
+========================== */
 
 app.use(`${API}/eventos`, eventoRoutes);
+
 app.use(`${API}/trilhas`, trilhaRoutes);
+
 app.use(`${API}/biodiversidade`, biodiversidadeRoutes);
+
 app.use(`${API}/auth`, authRoutes);
 
 /* ==========================
@@ -66,21 +76,58 @@ app.use(`${API}/auth`, authRoutes);
 
 app.get("/", (req, res) => {
 
-    res.sendFile(path.join(__dirname, "public", "pages", "index.html"));
+    res.sendFile(
+
+        path.join(
+
+            __dirname,
+
+            "public",
+
+            "pages",
+
+            "index.html"
+
+        )
+
+    );
 
 });
+
+/* ==========================
+   Rota inexistente
+========================== */
+
+app.use((req, res) => {
+
+    res.status(404).json({
+
+        success: false,
+
+        message: "Rota não encontrada."
+
+    });
+
+});
+
+/* ==========================
+   Tratamento de erros
+========================== */
+
+app.use(errorHandler);
 
 /* ==========================
    Inicialização
 ========================== */
 
-app.use(errorHandler);
-
 app.listen(PORT, () => {
 
     console.log("===================================");
+
     console.log("Servidor iniciado com sucesso!");
+
     console.log(`http://localhost:${PORT}`);
+
     console.log("===================================");
 
 });

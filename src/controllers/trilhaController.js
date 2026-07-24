@@ -1,4 +1,4 @@
-const Trilha = require("../models/Trilha");
+const TrilhaModel = require("../models/TrilhaModel");
 const ApiResponse = require("../utils/ApiResponse");
 const ApiError = require("../utils/ApiError");
 
@@ -8,7 +8,7 @@ class TrilhaController {
 
         try {
 
-            const trilhas = await Trilha.listarTodos("nome");
+            const trilhas = await TrilhaModel.listarTodos("nome");
 
             ApiResponse.success(
                 res,
@@ -28,7 +28,7 @@ class TrilhaController {
 
         try {
 
-            const trilha = await Trilha.buscarPorId(req.params.id);
+            const trilha = await TrilhaModel.buscarPorId(req.params.id);
 
             if (!trilha) {
                 throw new ApiError("Trilha não encontrada.", 404);
@@ -52,7 +52,7 @@ class TrilhaController {
 
         try {
 
-            const id = await Trilha.criar(req.body);
+            const id = await TrilhaModel.criar(req.body);
 
             ApiResponse.created(
                 res,
@@ -72,7 +72,7 @@ class TrilhaController {
 
         try {
 
-            const alterados = await Trilha.atualizar(
+            const alterados = await TrilhaModel.atualizar(
                 req.params.id,
                 req.body
             );
@@ -99,7 +99,7 @@ class TrilhaController {
 
         try {
 
-            const removidos = await Trilha.excluir(req.params.id);
+            const removidos = await TrilhaModel.excluir(req.params.id);
 
             if (!removidos) {
                 throw new ApiError("Trilha não encontrada.", 404);

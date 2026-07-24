@@ -1,4 +1,4 @@
-const Evento = require("../models/Evento");
+const EventoModel = require("../models/EventoModel");
 const ApiResponse = require("../utils/ApiResponse");
 const ApiError = require("../utils/ApiError");
 
@@ -8,7 +8,7 @@ class EventoController {
 
         try {
 
-            const eventos = await Evento.listarTodos("data");
+            const eventos = await EventoModel.listarTodos("data");
 
             ApiResponse.success(
                 res,
@@ -28,7 +28,7 @@ class EventoController {
 
         try {
 
-            const evento = await Evento.buscarPorId(req.params.id);
+            const evento = await EventoModel.buscarPorId(req.params.id);
 
             if (!evento) {
                 throw new ApiError("Evento não encontrado.", 404);
@@ -52,7 +52,7 @@ class EventoController {
 
         try {
 
-            const id = await Evento.criar(req.body);
+            const id = await EventoModel.criar(req.body);
 
             ApiResponse.created(
                 res,
@@ -72,7 +72,7 @@ class EventoController {
 
         try {
 
-            const alterados = await Evento.atualizar(
+            const alterados = await EventoModel.atualizar(
                 req.params.id,
                 req.body
             );
@@ -99,7 +99,7 @@ class EventoController {
 
         try {
 
-            const removidos = await Evento.excluir(req.params.id);
+            const removidos = await EventoModel.excluir(req.params.id);
 
             if (!removidos) {
                 throw new ApiError("Evento não encontrado.", 404);

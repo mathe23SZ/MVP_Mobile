@@ -1,51 +1,11 @@
 const db = require("../config/database");
+const BaseModel = require("./BaseModel");
 
-class Evento {
+class Evento extends BaseModel {
 
-    listarTodos() {
+    constructor() {
 
-        return new Promise((resolve, reject) => {
-
-            db.all(
-                "SELECT * FROM eventos ORDER BY data",
-                [],
-                (erro, rows) => {
-
-                    if (erro)
-                        reject(erro);
-
-                    resolve(rows);
-
-                }
-
-            );
-
-        });
-
-    }
-
-    buscarPorId(id) {
-
-        return new Promise((resolve, reject) => {
-
-            db.get(
-
-                "SELECT * FROM eventos WHERE id = ?",
-
-                [id],
-
-                (erro, row) => {
-
-                    if (erro)
-                        reject(erro);
-
-                    resolve(row);
-
-                }
-
-            );
-
-        });
+        super("eventos");
 
     }
 
@@ -57,19 +17,24 @@ class Evento {
 
                 `INSERT INTO eventos
                 (titulo, descricao, data, status)
-                VALUES (?,?,?,?)`,
+                VALUES (?, ?, ?, ?)`,
 
                 [
+
                     evento.titulo,
+
                     evento.descricao,
+
                     evento.data,
+
                     evento.status
+
                 ],
 
                 function (erro) {
 
                     if (erro)
-                        reject(erro);
+                        return reject(erro);
 
                     resolve(this.lastID);
 
@@ -88,11 +53,18 @@ class Evento {
             db.run(
 
                 `UPDATE eventos
-                 SET titulo=?,
-                     descricao=?,
-                     data=?,
-                     status=?
-                 WHERE id=?`,
+
+                SET
+
+                titulo=?,
+
+                descricao=?,
+
+                data=?,
+
+                status=?
+
+                WHERE id=?`,
 
                 [
 
@@ -111,32 +83,7 @@ class Evento {
                 function (erro) {
 
                     if (erro)
-                        reject(erro);
-
-                    resolve(this.changes);
-
-                }
-
-            );
-
-        });
-
-    }
-
-    excluir(id) {
-
-        return new Promise((resolve, reject) => {
-
-            db.run(
-
-                "DELETE FROM eventos WHERE id=?",
-
-                [id],
-
-                function (erro) {
-
-                    if (erro)
-                        reject(erro);
+                        return reject(erro);
 
                     resolve(this.changes);
 

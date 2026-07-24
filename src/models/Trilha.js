@@ -1,54 +1,11 @@
 const db = require("../config/database");
+const BaseModel = require("./BaseModel");
 
-class Trilha {
+class Trilha extends BaseModel {
 
-    listarTodos() {
+    constructor() {
 
-        return new Promise((resolve, reject) => {
-
-            db.all(
-
-                "SELECT * FROM trilhas ORDER BY nome",
-
-                [],
-
-                (erro, rows) => {
-
-                    if (erro)
-                        return reject(erro);
-
-                    resolve(rows);
-
-                }
-
-            );
-
-        });
-
-    }
-
-    buscarPorId(id) {
-
-        return new Promise((resolve, reject) => {
-
-            db.get(
-
-                "SELECT * FROM trilhas WHERE id = ?",
-
-                [id],
-
-                (erro, row) => {
-
-                    if (erro)
-                        return reject(erro);
-
-                    resolve(row);
-
-                }
-
-            );
-
-        });
+        super("trilhas");
 
     }
 
@@ -59,16 +16,16 @@ class Trilha {
             db.run(
 
                 `INSERT INTO trilhas
-                (nome,dificuldade,distancia,status)
-                VALUES (?,?,?,?)`,
+                (titulo, descricao, data, status)
+                VALUES (?, ?, ?, ?)`,
 
                 [
 
-                    trilha.nome,
+                    trilha.titulo,
 
-                    trilha.dificuldade,
+                    trilha.descricao,
 
-                    trilha.distancia,
+                    trilha.data,
 
                     trilha.status
 
@@ -99,11 +56,11 @@ class Trilha {
 
                 SET
 
-                nome=?,
+                titulo=?,
 
-                dificuldade=?,
+                descricao=?,
 
-                distancia=?,
+                data=?,
 
                 status=?
 
@@ -111,42 +68,17 @@ class Trilha {
 
                 [
 
-                    trilha.nome,
+                    trilha.titulo,
 
-                    trilha.dificuldade,
+                    trilha.descricao,
 
-                    trilha.distancia,
+                    trilha.data,
 
                     trilha.status,
 
                     id
 
                 ],
-
-                function (erro) {
-
-                    if (erro)
-                        return reject(erro);
-
-                    resolve(this.changes);
-
-                }
-
-            );
-
-        });
-
-    }
-
-    excluir(id) {
-
-        return new Promise((resolve, reject) => {
-
-            db.run(
-
-                "DELETE FROM trilhas WHERE id=?",
-
-                [id],
 
                 function (erro) {
 

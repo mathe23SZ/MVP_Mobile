@@ -1,7 +1,12 @@
 const db = require("../config/database");
+const BaseModel = require("./BaseModel");
 
-class Biodiversidade {
+class Biodiversidade extends BaseModel {
+
+    constructor(){
+
+        super("biodiversidade");
+
+    }
 
 }
-
-module.exports = Biodiversidade;

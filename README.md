@@ -25,7 +25,7 @@ Para rodar o projeto em sua máquina local, certifique-se de ter o [Node.js](htt
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/mathe23SZ/MVP_Mobile.git
-   cd circuito-tere-verde
+   cd MVP_Mobile
    ```
 
 2. **Instale as dependências do Backend:**

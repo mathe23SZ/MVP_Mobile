@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<body>
+
+<header>
+<h1>Painel Administrativo</h1>
+</header>
+
+<div class="container">
+
+<h2>Login</h2>
+
+<input id="usuario" placeholder="Usuário">
+<br><br>
+
+<input id="senha" type="password" placeholder="Senha">
+<br><br>
+
+<button onclick="login()">Entrar</button>
+
+<div id="painel" style="display:none">
+
+<h2>Novo Evento</h2>
+
+<input id="titulo" placeholder="Título">
+
+<br><br>
+
+<input id="descricao" placeholder="Descrição">
+
+<br><br>
+
+<input id="data">
+
+<br><br>
+
+<button onclick="salvarEvento()">
+Cadastrar Evento
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+    const usuario =
+    document.getElementById("usuario").value;
+
+    const senha =
+    document.getElementById("senha").value;
+
+    if(usuario === "admin" && senha === "1234"){
+
+        document.getElementById("painel")
+        .style.display = "block";
+
+        alert("Login realizado");
+
+    }else{
+
+        alert("Usuário inválido");
+
+    }
+
+}
+
+function salvarEvento(){
+
+    fetch("/api/eventos",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            titulo:
+            document.getElementById("titulo").value,
+
+            descricao:
+            document.getElementById("descricao").value,
+
+            data:
+            document.getElementById("data").value
+
+        })
+
+    })
+    .then(()=>alert("Evento cadastrado"));
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+console.log("Terê Verde Online iniciado.");
